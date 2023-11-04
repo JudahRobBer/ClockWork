@@ -33,5 +33,15 @@ export const globalStyles = StyleSheet.create({
         fontSize: 30,
         textAlign: 'center',
         marginBottom: 20,
+    }, 
+    label: {
+        fontSize: 18,
+        marginBottom: 5,
     }
+
+
+
+
+
+
 });
