@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import {Picker} from 'react-natve-picker/picker'
-import { globalStyles } from '../../style/global';
-import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
-import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
+import { View, Text, Picker } from 'react-native';
 
-
-const CommitmentForm = () => {
+const TimeSelector = () => {
   const [hours, setHours] = useState('00');
   const [minutes, setMinutes] = useState('00');
   const [ampm, setAMPM] = useState('AM');
@@ -50,42 +45,6 @@ const CommitmentForm = () => {
       </View>
     </View>
   );
-  // const [event, setEvent] = useState('');
-  // const [time, setTime] = useState('');
-
-
-  // const handleSubmit = async() => {
-  //   console.log('Task:', task);
-  //   console.log('Time:', time);
-  // };
-
-  // return (
-  //   <View style={globalStyles.container}>
-  //     <Text style={globalStyles.label}>Enter Event name:</Text>
-  //     <TextInput
-  //       style={globalStyles.input}
-  //       placeholder="Enter Event"
-  //       onChangeText={setEvent}
-  //       value={event}
-  //     />
-
-  //     <Text style={globalStyles.label}>Enter time (Start - End):</Text>
-  //     <TextInput
-  //       style={globalStyles.input}
-  //       placeholder="Enter time"
-  //       onChangeText={setTime}
-  //       value={time}
-  //       keyboardType="numeric"
-  //     />
-
-  //     <Button title="Submit" onPress={handleSubmit} />
-
-  //   </View>
-  // );
 };
 
-
-
-export default CommitmentForm;
-
-
+export default TimeSelector;
