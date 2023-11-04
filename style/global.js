@@ -30,4 +30,4 @@ export const globalStyles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20,
     }
-});
+})
