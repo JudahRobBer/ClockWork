@@ -66,7 +66,7 @@ const Login = ({navigation}) => {
                 {
                 pwd:password, 
                 user:email, 
-                tasks: [{title:"testTitle", category:"category",duration:"duration"}],
+                tasks: [],
                 goal_points: 0,
                 current_points:0,
                 commitments: [],
