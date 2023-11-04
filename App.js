@@ -4,8 +4,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from "@react-navigation/native"
 import List from "./app/screens/List"
 import Login from "./app/screens/Login"
-import Details from "./app/screens/Details"
+import Commitments from "./app/screens/Commitments"
 import PointsTarget from "./app/screens/PointsTarget"
+import Details from "./app/screens/Details"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
 import {User, onAuthStateChanged, getAuth} from "firebase/auth"
 import {addDoc, collection, doc,getDoc} from "firebase/firestore"
@@ -32,7 +33,8 @@ function InsideLayout () {
     <insideStack.Navigator initialRouteName="PointsTarget"> 
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
       <insideStack.Screen name = "Tasks" component={List}/>
-      <insideStack.Screen name ="User Details" component = {Details}/>
+      <insideStack.Screen name ="Commtiments" component = {Commitments}/>
+      <insideStack.Screen name ="Details" component = {Details}/>
       <insideStack.Screen name="Login" component={Login} option={{headerShown:false}}/>
     </insideStack.Navigator>
   )
@@ -54,7 +56,7 @@ export default function App() {
         : <Stack.Screen name="Login" component={Login} options={{headerLeft: () => null,}}/>}
         <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}}/>
         <insideStack.Screen name = "Todo List" component={List}/>
-        <insideStack.Screen name = "Details" component={Details} options={{headerLeft: () => null,}}/>
+        <insideStack.Screen name = "Commitments" component={Commitments} options={{headerLeft: () => null,}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

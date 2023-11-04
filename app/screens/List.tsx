@@ -134,7 +134,8 @@ const List = ({navigation}) => {
                 keyExtractor={(todo:Todo) => todo.id}/>
             </View>
             )}
-            <Button onPress={() => navigation.navigate('Details')} title="Open Details"/>
+            <Button onPress={() => navigation.navigate('Details')}title="Open Details" />
+            <Button onPress={() => navigation.navigate('Commitments')} title="Commitments"/>
             <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
         </View>
     );

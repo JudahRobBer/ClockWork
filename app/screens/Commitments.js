@@ -17,6 +17,7 @@ const CommitmentForm = () => {
 
   return (
     <View style={globalStyles.container}>
+      <View>
       <Text style={globalStyles.label}>Enter Event name:</Text>
       <TextInput
         style={globalStyles.input}
@@ -24,7 +25,9 @@ const CommitmentForm = () => {
         onChangeText={setEvent}
         value={event}
       />
+      </View>
 
+      <View>
       <Text style={globalStyles.label}>Enter time (Start - End):</Text>
       <TextInput
         style={globalStyles.input}
@@ -35,12 +38,10 @@ const CommitmentForm = () => {
       />
 
       <Button title="Submit" onPress={handleSubmit} />
-
+      </View>
     </View>
   );
 };
-
-
 
 export default CommitmentForm;
 
