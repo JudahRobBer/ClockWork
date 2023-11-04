@@ -5,6 +5,16 @@ import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} fro
 import {doc, addDoc, collection,setDoc} from "firebase/firestore"
 
 
+export interface Task{
+    title:string,
+    duration, //int
+    category:string,
+    location,
+    status,
+    time
+}
+
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,7 +42,12 @@ const Login = () => {
             const userUID = currentUser.uid
             const collectionRef = collection(FIRESTORE_DB,"users")
             
-            const addToDB = await setDoc(doc(collectionRef,userUID), {pwd:password, user:email});
+            const addToDB = await setDoc(doc(collectionRef,userUID), 
+                {
+                pwd:password, 
+                user:email, 
+                tasks: [],
+                });
 
             console.log("success")
         } catch (error) {
