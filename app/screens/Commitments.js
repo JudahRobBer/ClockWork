@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Platform } from 'react-native';
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
@@ -17,6 +17,7 @@ const CommitmentForm = () => {
 
   return (
     <View style={globalStyles.container}>
+      <View>
       <Text style={globalStyles.label}>Enter Event name:</Text>
       <TextInput
         style={globalStyles.input}
@@ -24,7 +25,9 @@ const CommitmentForm = () => {
         onChangeText={setEvent}
         value={event}
       />
+      </View>
 
+      <View>
       <Text style={globalStyles.label}>Enter time (Start - End):</Text>
       <TextInput
         style={globalStyles.input}
@@ -35,12 +38,10 @@ const CommitmentForm = () => {
       />
 
       <Button title="Submit" onPress={handleSubmit} />
-
+      </View>
     </View>
   );
 };
-
-
 
 export default CommitmentForm;
 
