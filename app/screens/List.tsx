@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         marginVertical: 2,
     },
     todoContainer: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: "#fff",
         padding:10,
