@@ -24,6 +24,8 @@ const List = ({navigation}) => {
     //mutate and acces list data
     const [todos,setTodos] = useState([]);
     const [todo,setTodo] = useState("");
+    const [category,setCategory] = useState("");
+    const [duration, setDuration] = useState(null);
 
 
     //The user authentication is linked to the database with UID
@@ -112,18 +114,35 @@ const List = ({navigation}) => {
     const addTask= async() => {
         const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
         const taskCopy = todos
-        taskCopy.push({title:todo, done:false})
+        taskCopy.push({title:todo,
+            done:false,
+            category:category,
+            start_time: 0o0,
+            end_time: 0o0,
+            duration: duration
+            })
         await updateDoc(docRef, {
-            tasks: taskCopy
+            tasks: taskCopy,
         })
-        setTodo("");
+        setTodo(""),
+        setCategory("")
+        setDuration("")
+        ;
+
     }
     
     return (
         <View style= {styles.container}>
             <View style = {styles.form}>
-                <TextInput style = {styles.input} placeholder = "Add Todo"
+                <TextInput style = {styles.input} placeholder = "Add Todo"  // copy buttons for more options
                 onChangeText = {(text) => setTodo(text)} value = {todo}/>
+
+                <TextInput style = {styles.input} placeholder = "Add Category" 
+                onChangeText = {(text) => setCategory(text)} value = {category}/>
+
+                <TextInput style = {styles.input} placeholder = "Add Duration" 
+                onChangeText = {(number) => setDuration(number)} value = {duration}/>
+
                 <Button onPress = {addTask} title="Add Todo" disabled={todo === ""}/>
             </View>
             {todos.length > 0 && (
@@ -154,9 +173,10 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 40,
-        borderWidth: 1,
-        borderRadius: 4,
+        borderWidth: 2,
+        borderRadius: 10,
         backgroundColor:"#fff",
+        marginVertical: 2,
     },
     todoContainer: {
         flexDirection: 'row',
@@ -175,6 +195,7 @@ const styles = StyleSheet.create({
     todo: {
         flex: 1,
         flexDirection: 'row',
+        fontFamily: "Optima",
         alignItems: 'center',
     }
 
