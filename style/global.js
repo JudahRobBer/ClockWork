@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
+    box: {
+        width: 50,
+        height: 50,
+      },
     container: {
         flex: 1,
         justifyContent: 'center',

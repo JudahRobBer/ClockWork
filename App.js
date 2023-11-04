@@ -38,9 +38,10 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName ='Login'>
         {user ? <Stack.Screen name="Inside" component = {InsideLayout} options={{headerShown: false}}/>
-        : <Stack.Screen name="Login" component={Login} option={{headerShown:false}}/>}
-        <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
+        : <Stack.Screen name="Login" component={Login} options={{headerLeft: () => null,}}/>}
+        <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}}/>
         <insideStack.Screen name = "Todo List" component={List}/>
+        <insideStack.Screen name = "Details" component={Details}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
