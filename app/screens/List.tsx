@@ -104,18 +104,13 @@ const List = ({navigation}) => {
         );
     }
 
-    const addTodo = async () => {
-        const doc = await addDoc(collection(FIRESTORE_DB,'todos'), {title:todo, done:false});
-        console.log("file add_todo:",doc);
-        setTodo("");
-    };
+   
 
     //get the existing array of tasks
     //add the next item to the array
     //replace the array in the document 
     const addTask= async() => {
         const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
-        getUserTasks()
         const taskCopy = todos
         taskCopy.push({title:todo, done:false})
         await updateDoc(docRef, {
