@@ -8,6 +8,7 @@ import Details from "./app/screens/Details"
 import PointsTarget from "./app/screens/PointsTarget"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
 import {User, onAuthStateChanged} from "firebase/auth"
+import {addDoc, collection, doc} from "firebase/firestore"
 
 
 const Stack = createNativeStackNavigator();

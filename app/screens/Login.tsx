@@ -1,7 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import { Text, View, Button, StyleSheet, TextInput, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
-import {FIREBASE_AUTH} from "../../firebaseConfig";
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
+import {FIREBASE_AUTH, FIRESTORE_DB} from "../../firebaseConfig";
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from "firebase/auth"
+import {doc, addDoc, collection,setDoc} from "firebase/firestore"
+
+
+export interface Task{
+    title:string,
+    duration, //int
+    category:string,
+    location,
+    status,
+    time
+}
 
 const Login = ({navigation}) => {
     const [email, setEmail] = useState("");
@@ -25,6 +36,18 @@ const Login = ({navigation}) => {
         setLoading(true);
         try {
             const response = await createUserWithEmailAndPassword(auth,email,password);
+            
+            const currentUser = getAuth().currentUser
+            const userUID = currentUser.uid
+            const collectionRef = collection(FIRESTORE_DB,"users")
+            
+            const addToDB = await setDoc(doc(collectionRef,userUID), 
+                {
+                pwd:password, 
+                user:email, 
+                tasks: [],
+                });
+
             console.log("success")
         } catch (error) {
             console.log(error);
@@ -32,6 +55,8 @@ const Login = ({navigation}) => {
             setLoading(false)
         }
     }
+
+
 
     return (
         <View style={styles.container}>
