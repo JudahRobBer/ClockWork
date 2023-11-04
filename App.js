@@ -7,8 +7,8 @@ import Login from "./app/screens/Login"
 import Details from "./app/screens/Details"
 import PointsTarget from "./app/screens/PointsTarget"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
-import {User, onAuthStateChanged} from "firebase/auth"
-import {addDoc, collection, doc} from "firebase/firestore"
+import {User, onAuthStateChanged, getAuth} from "firebase/auth"
+import {addDoc, collection, doc,getDoc} from "firebase/firestore"
 
 
 const Stack = createNativeStackNavigator();
@@ -17,8 +17,19 @@ const insideStack = createNativeStackNavigator();
 
 
 function InsideLayout () {
+  const [path,setPath] = useState("PointsTarget")
+  
+  currentUser = getAuth().currentUser
+  const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+        getDoc(docRef).then((docsnap) => {
+            if (docsnap.exists()) {
+               setPath("Tasks")
+            }
+        })
+    
+
   return (
-    <insideStack.Navigator initialRouteName="PointsTarget">
+    <insideStack.Navigator initialRouteName="PointsTarget"> 
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
       <insideStack.Screen name = "Tasks" component={List}/>
       <insideStack.Screen name ="User Details" component = {Details}/>
@@ -26,6 +37,7 @@ function InsideLayout () {
     </insideStack.Navigator>
   )
 }
+
 
 export default function App() {
   const [user, setUser] = useState(null);

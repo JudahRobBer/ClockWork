@@ -14,6 +14,12 @@ export interface Todo {
     id:string
 }
 
+export interface Task {
+    title:string;
+    category: string;
+    duration: number;
+}
+
 const List = ({navigation}) => {
     //mutate and acces list data
     const [todos,setTodos] = useState([]);
@@ -21,13 +27,14 @@ const List = ({navigation}) => {
 
 
     //The user authentication is linked to the database with UID
-    const currentUserUID = getAuth().currentUser.uid
-    const docRef = doc(FIRESTORE_DB,"users",currentUserUID)
-
+    const currentUserUID = getAuth().currentUser.uid;
+    const docRef = doc(FIRESTORE_DB,"users",currentUserUID);
+    
     //triggered on updates
     //get all of the task data from the user document
+    /*
     useEffect(() => {
-       const todoRef = collection(FIRESTORE_DB,"todos")
+       const todoRef = collection(FIRESTORE_DB,"todos");
        const subscriber = onSnapshot(todoRef,{
         next: (snapshot)=> {
             const todos = [];
@@ -42,6 +49,34 @@ const List = ({navigation}) => {
        });
        return () => subscriber();
     },[]);
+    */
+    
+    useEffect(() => {
+        getUserTasks()
+    },[]);
+    
+    const getUserTasks = ()=> {
+        const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+        getDoc(docRef).then((docsnap) => {
+            if (docsnap.exists()) {
+                const taskArray = []
+                const tasks = docsnap.get("tasks")
+                tasks.forEach((task) => {
+                    taskArray.push(task)
+                })
+
+                
+                console.log("Task Data",tasks)
+                setTodos(taskArray)
+            } else  {
+                console.log("Tasks not found")
+            }
+        })
+        
+    }
+
+    
+
 
     const renderTodo = ({item}) => {
         
