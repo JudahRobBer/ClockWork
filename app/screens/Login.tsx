@@ -46,6 +46,7 @@ const Login = ({navigation}) => {
                 pwd:password, 
                 user:email, 
                 tasks: [],
+                goal_points: 0
                 });
 
             console.log("success")
