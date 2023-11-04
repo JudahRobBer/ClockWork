@@ -5,7 +5,7 @@ import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
 
 
-const TaskForm = () => {
+const CommitmentForm = () => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
 
@@ -42,6 +42,6 @@ const TaskForm = () => {
 
 
 
-export default TaskForm;
+export default CommitmentForm;
 
 
