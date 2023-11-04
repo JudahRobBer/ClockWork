@@ -15,7 +15,6 @@ export interface Task{
     end_time: int
 }
 
-<<<<<<< HEAD
 export interface Points{
     earned: int,
     goal: int
@@ -33,10 +32,9 @@ export interface Worktime{
 }
 
 
-const Login = () => {
-=======
+
 const Login = ({navigation}) => {
->>>>>>> 6aaf6bec080645107b94d4895bbe7c894ed8f2e9
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading,setLoading] = useState(false);
