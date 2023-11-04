@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Text, View, Button, StyleSheet, TextInput, FlatList, TouchableOpacity} from 'react-native';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
-import {signOut} from "firebase/auth"
-import {addDoc, collection, onSnapshot, doc, updateDoc, deleteDoc, query, where} from "firebase/firestore"
+import {signOut, getAuth} from "firebase/auth"
+import {addDoc, collection, onSnapshot, doc, updateDoc, deleteDoc, getDoc} from "firebase/firestore"
 import {Entypo} from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -19,11 +19,9 @@ const List = ({navigation}) => {
     const [todos,setTodos] = useState([]);
     const [todo,setTodo] = useState("");
 
+    const currentUserUID = getAuth().currentUser.uid
+    const docRef = doc(FIRESTORE_DB,"users",currentUserUID)
 
-    
-    
-   
-    
     //triggered on updates
     //get all todo data from fireship and store
     useEffect(() => {

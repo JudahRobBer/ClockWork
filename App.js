@@ -7,6 +7,7 @@ import Login from "./app/screens/Login"
 import Details from "./app/screens/Details"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
 import {User, onAuthStateChanged} from "firebase/auth"
+import {addDoc, collection, doc} from "firebase/firestore"
 
 
 const Stack = createNativeStackNavigator();
