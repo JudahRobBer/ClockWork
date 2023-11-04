@@ -6,6 +6,7 @@ import List from "./app/screens/List"
 import Login from "./app/screens/Login"
 import Commitments from "./app/screens/Commitments"
 import PointsTarget from "./app/screens/PointsTarget"
+import Details from "./app/screens/Details"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
 import {User, onAuthStateChanged, getAuth} from "firebase/auth"
 import {addDoc, collection, doc,getDoc} from "firebase/firestore"
@@ -33,6 +34,7 @@ function InsideLayout () {
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
       <insideStack.Screen name = "Tasks" component={List}/>
       <insideStack.Screen name ="Commtiments" component = {Commitments}/>
+      <insideStack.Screen name ="Details" component = {Details}/>
       <insideStack.Screen name="Login" component={Login} option={{headerShown:false}}/>
     </insideStack.Navigator>
   )
