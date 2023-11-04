@@ -38,10 +38,13 @@ export const globalStyles = StyleSheet.create({
     text: {
         fontSize: 20,
         textAlign: 'center',
+    },
+
+
+    label: {
+        fontSize: 18,
+        marginBottom: 5,
     }
-
-
-
 
 
 
