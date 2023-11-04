@@ -46,14 +46,16 @@ export const globalStyles = StyleSheet.create({
     label: {
         fontSize: 18,
         marginBottom: 5,
+    },
+    
     containerCom: {
         height: 80,
         alignItems: 'center', // This centers the children vertically
         
         
         marginBottom: 5,
-    },
+    }
 
 
 
-});
+} );
