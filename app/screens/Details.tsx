@@ -11,5 +11,3 @@ const Details = ({navigation}) => {
 }
 
 export default Details
-
-dxkmc
