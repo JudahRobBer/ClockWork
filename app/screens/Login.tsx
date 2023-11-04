@@ -3,18 +3,17 @@ import { Text, View, Button, StyleSheet, TextInput, ActivityIndicator, KeyboardA
 import {FIREBASE_AUTH} from "../../firebaseConfig";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth"
 
-
-const Login = () => {
+const Login = ({navigation}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading,setLoading] = useState(false);
     const auth = FIREBASE_AUTH;
 
-
     const signIn = async() => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth,email,password);
+            navigation.navigate('PointsTarget')
         } catch (error) {
             alert("Login Failed" + error.message);
         } finally {
