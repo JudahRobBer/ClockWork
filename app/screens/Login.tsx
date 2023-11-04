@@ -3,6 +3,7 @@ import { Text, View, Button, StyleSheet, TextInput, ActivityIndicator, KeyboardA
 import {FIREBASE_AUTH, FIRESTORE_DB} from "../../firebaseConfig";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from "firebase/auth"
 import {doc, addDoc, collection,setDoc} from "firebase/firestore"
+import { globalStyles } from '../../style/global';
 
 
 export interface Task{
@@ -97,7 +98,7 @@ const Login = ({navigation}) => {
                     <Button title="Create Account" onPress = {() => signUp()} />
                 </>}
             </KeyboardAvoidingView>
-        </View>
+            </View>
     );
 };
 

@@ -1,15 +1,21 @@
 import { StyleSheet } from 'react-native';
 
 export const globalStyles = StyleSheet.create({
+    box: {
+        width: 50,
+        height: 50,
+      },
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 16,
+        marginLeft: 80,
+        height: 120,
+        flexDirection: 'row', // This makes the children elements align horizontally
+        alignItems: 'center', // This centers the children vertically
     },
     title: {
         fontSize: 40,
         textAlign: 'center',
-        marginBottom: 20,
+        marginTop: 60,
+        marginBottom: 30,
     },
     input: {
         height: 40,
@@ -18,16 +24,25 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 10,
         paddingHorizontal: 10,
     },
-    img: {
-        height: 220,
-        width: 220,
-        position: 'relative',
-        bottom: 100,
-        left: 80,
+    box: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderWidth: 1, // Add a border to the box (you can customize border styles)
+        padding: 10, // Add padding around the content inside the box
+        borderRadius: 10, // Add rounded corners to the box
     },
-    content: {
-        fontSize: 30,
+    img: {
+        height: 50,
+        width: 50,
+    },
+    text: {
+        fontSize: 20,
         textAlign: 'center',
-        marginBottom: 20,
     }
+
+
+
+
+
+
 });
