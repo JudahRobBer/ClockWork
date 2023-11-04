@@ -109,13 +109,27 @@ const List = ({navigation}) => {
         console.log("file add_todo:",doc);
         setTodo("");
     };
+
+    //get the existing array of tasks
+    //add the next item to the array
+    //replace the array in the document 
+    const addTask= async() => {
+        const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+        getUserTasks()
+        const taskCopy = todos
+        taskCopy.push({title:todo, done:false})
+        await updateDoc(docRef, {
+            tasks: taskCopy
+        })
+        setTodo("");
+    }
     
     return (
         <View style= {styles.container}>
             <View style = {styles.form}>
                 <TextInput style = {styles.input} placeholder = "Add Todo"
                 onChangeText = {(text) => setTodo(text)} value = {todo}/>
-                <Button onPress = {addTodo} title="Add Todo" disabled={todo === ""}/>
+                <Button onPress = {addTask} title="Add Todo" disabled={todo === ""}/>
             </View>
             {todos.length > 0 && (
             <View>
