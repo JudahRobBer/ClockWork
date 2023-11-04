@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button,Image, TouchableHighlight } from 'react-native';
 import { globalStyles } from '../../style/global';
 import {useState} from 'react'
-import {FIRESTORE_DB} from "../../firebaseConfig"
+import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig"
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
 import {getAuth} from "firebase/auth"
 
@@ -28,15 +28,42 @@ export default function ReviewDetails({ navigation }) {
     navigation.navigate("Tasks");
   }
   return (
-    <View style={globalStyles.title}>
+    <View>
       <Text style={globalStyles.title}>Point Targets!</Text>
-      <Text style={globalStyles.content}>2 hours-20 points</Text>
-      <Button title='Hit Me!' onPress={() => {setPoint(20); pressHandlernext()}} />
-      <Text style={globalStyles.content}>4 hours-40 points</Text>
-      <Button title='Hit Me!' onPress={() => {setPoint(40); pressHandlernext()}} />
-      <Text style={globalStyles.content}>6 hours-60 points</Text>
-      <Button title='Hit Me!' onPress={() => {setPoint(60); pressHandlernext()}}/>
-      <Button title='Log Out' onPress={pressHandler} />
+      <Text style={[globalStyles.text, {fontSize: 15, marginBottom : 20}]}>Set your goal by hitting the hours you wish to work</Text>
+      <Text style={[globalStyles.text, {fontSize: 15, marginBottom : 20}]}>Be Mindful of the workload!</Text>
+      <TouchableHighlight
+        style={globalStyles.container}
+        underlayColor="lightgray" // Change the background color when pressed
+        onPress={() => {setPoint(20); pressHandlernext()}}
+      >
+        <View style={globalStyles.box}>
+          <Image source={require('../../assets/20_pts.png')} style={{height:50,width:50}} />
+          <Text style={[globalStyles.text, { color: 'green' }]}>  2 hours - 20 points</Text>
+        </View>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={globalStyles.container}
+        underlayColor="lightgray" // Change the background color when pressed
+        onPress={() => {setPoint(40); pressHandlernext()}}
+      >
+        <View style={globalStyles.box}>
+          <Image source={require('../../assets/40_pts.png')} style={{height:50,width:50}} />
+          <Text style={[globalStyles.text, { color: 'black' }]}>  4 hours - 40 points</Text>
+        </View>
+      </TouchableHighlight>
+      <TouchableHighlight
+        style={[globalStyles.container, {marginBottom: 100}]}
+        underlayColor="lightgray" // Change the background color when pressed
+        onPress={() => {setPoint(60); pressHandlernext()}}
+      >
+        <View style={globalStyles.box}>
+          <Image source={require('../../assets/60_pts.png')} style={{height:50,width:50}} />
+          <Text style={[globalStyles.text, { color: 'red' }]}>  6 hours - 60 points</Text>
+        </View>
+      </TouchableHighlight>
+      <Button title='Log Out' onPress={() =>{FIREBASE_AUTH.signOut(), 
+                                        navigation.navigate('Login')}}/>
     </View>
   );
 }
