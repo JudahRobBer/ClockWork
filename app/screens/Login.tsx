@@ -7,28 +7,28 @@ import {doc, addDoc, collection,setDoc} from "firebase/firestore"
 
 export interface Task{
     title:string,
-    duration: int,
+    duration: number,
     category:string,
     location: string,
     status: boolean,
-    start_time: int,
-    end_time: int
+    start_time: number,
+    end_time: number
 }
 
 export interface Points{
-    earned: int,
-    goal: int
+    earned: number,
+    goal: number
 }
 
 export interface Commitment{
     commitment: string,
-    start_time: Int16Array,
-    end_time: int
+    start_time: number,
+    end_time: number
 }
 
 export interface Worktime{
-    start_time: int,
-    end_time: int
+    start_time: number,
+    end_time: number
 }
 
 
