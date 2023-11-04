@@ -8,7 +8,11 @@ const TaskForm = () => {
   const [time, setTime] = useState('');
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async() => {
+    const currentUser = getAuth().currentUser
+    const userUID = currentUser.uid
+    const docRef = doc(FIRESTORE_DB, "users",userUID)
+    const updateUser = await updateDoc(docRef, {commitments: [event, time]})
     console.log('Task:', task);
     console.log('Time:', time);
   };
