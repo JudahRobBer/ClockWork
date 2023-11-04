@@ -18,10 +18,11 @@ const insideStack = createNativeStackNavigator();
 
 function InsideLayout () {
   return (
-    <insideStack.Navigator>
+    <insideStack.Navigator initialRouteName="PointsTarget">
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
-      <insideStack.Screen name = "Todo List" component={List}/>
+      <insideStack.Screen name = "Tasks" component={List}/>
       <insideStack.Screen name ="User Details" component = {Details}/>
+      <insideStack.Screen name="Login" component={Login} option={{headerShown:false}}/>
     </insideStack.Navigator>
   )
 }

@@ -19,11 +19,13 @@ const List = ({navigation}) => {
     const [todos,setTodos] = useState([]);
     const [todo,setTodo] = useState("");
 
+
+    //The user authentication is linked to the database with UID
     const currentUserUID = getAuth().currentUser.uid
     const docRef = doc(FIRESTORE_DB,"users",currentUserUID)
 
     //triggered on updates
-    //get all todo data from fireship and store
+    //get all of the task data from the user document
     useEffect(() => {
        const todoRef = collection(FIRESTORE_DB,"todos")
        const subscriber = onSnapshot(todoRef,{
