@@ -7,14 +7,34 @@ import {doc, addDoc, collection,setDoc} from "firebase/firestore"
 
 export interface Task{
     title:string,
-    duration, //int
+    duration: number,
     category:string,
-    location,
-    status,
-    time
+    location: string,
+    status: boolean,
+    start_time: number,
+    end_time: number
 }
 
+export interface Points{
+    earned: number,
+    goal: number
+}
+
+export interface Commitment{
+    commitment: string,
+    start_time: number,
+    end_time: number
+}
+
+export interface Worktime{
+    start_time: number,
+    end_time: number
+}
+
+
+
 const Login = ({navigation}) => {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading,setLoading] = useState(false);
@@ -46,7 +66,10 @@ const Login = ({navigation}) => {
                 pwd:password, 
                 user:email, 
                 tasks: [],
-                goal_points: 0
+                goal_points: 0,
+                current_points:0,
+                commitments: [],
+                worktime: [],
                 });
 
             console.log("success")
