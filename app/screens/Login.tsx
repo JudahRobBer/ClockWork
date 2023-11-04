@@ -11,7 +11,7 @@ export interface Task{
     duration: number,
     category:string,
     location: string,
-    status: boolean,
+    done: boolean,
     start_time: number,
     end_time: number
 }
