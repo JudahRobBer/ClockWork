@@ -39,4 +39,10 @@ export const globalStyles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     }
+
+
+
+
+
+
 });

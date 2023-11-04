@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
+import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
 
-const TaskForm = () => {
+
+const CommitmentForm = () => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
 
@@ -18,18 +20,18 @@ const TaskForm = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Enter Event name:</Text>
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.label}>Enter Event name:</Text>
       <TextInput
-        style={styles.input}
+        style={globalStyles.input}
         placeholder="Enter Event"
         onChangeText={setEvent}
         value={event}
       />
 
-      <Text style={styles.label}>Enter time (Start - End):</Text>
+      <Text style={globalStyles.label}>Enter time (Start - End):</Text>
       <TextInput
-        style={styles.input}
+        style={globalStyles.input}
         placeholder="Enter time"
         onChangeText={setTime}
         value={time}
@@ -42,20 +44,8 @@ const TaskForm = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 5,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    padding: 10,
-    marginBottom: 15,
-  },
-});
 
-export default TaskForm;
+
+export default CommitmentForm;
+
+
