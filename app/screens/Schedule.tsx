@@ -4,6 +4,7 @@ import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig"
 import CommitmentForm from './Commitments';
 
+
 const TableOfContents = () => {
     return (
       <View style={[styles.container, {marginTop : 40}]}>
@@ -60,7 +61,20 @@ const style2 = StyleSheet.create({
     },
 });
 
-export default function Schedule({navigation}){
+export default function ShowSchedule({navigation}){
+    // const currentUser = getAuth().currentUser;
+    // const userID = currentUser.userID;
+    // const docRef = doc(FIRESTORE_DB, "users", userID)
+
+    class FormattedTime {
+        constructor(stringForm) {
+            this.title = stringForm.slice(0,stringForm.search("_"))
+            stringForm = stringForm.slice(stringForm.search("_" + 1))
+            this.start = stringForm.slice(0,stringForm.slice(stringForm.search("_")))
+            stringForm = stringForm.slice(stringForm.search("_" + 1))
+            this.end = stringForm
+        }
+    }
     return(
         <View style={style2.container}>
             <Text style={[globalStyles.title, {fontSize : 30, marginTop : -200}]}> This is Your Schedule!</Text>
@@ -74,8 +88,8 @@ export default function Schedule({navigation}){
                                                     navigation.navigate('Login')}}/>
         </View>
     );
+
 }
-  
 
  
  

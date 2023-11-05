@@ -35,6 +35,9 @@ const handleSubmit = async() => {
   setTimeEnd("")
 
 };
+const generateschedule = () => {
+  navigation.navigate("Schedule")
+}
 
   return (
     <View >
@@ -71,10 +74,17 @@ const handleSubmit = async() => {
           />
         </View>
       </View>
-        
 
+      {formattedEvents.map((event, index) => (
+      <Text style={globalStyles.text} key={index}>{`${index +  1}. ${event.split('_')[0]} from ${event.split('_')[1]} to ${event.split('_')[2]}`}</Text>
+      ))}
+
+      
       <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#00FF00' }]} onPress={handleSubmit}>
-                <Text style = {globalStyles.buttonText}>Generate Schedule!</Text>
+                <Text style = {globalStyles.buttonText}> Submit!</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#FF0000' }]} onPress={generateschedule}>
+                <Text style = {globalStyles.buttonText}> Generate Schedule!</Text>
       </TouchableOpacity>
     </View>
   );
