@@ -5,6 +5,7 @@ import {signOut, getAuth} from "firebase/auth"
 import {addDoc, collection, onSnapshot, doc, updateDoc, deleteDoc, getDoc} from "firebase/firestore"
 import {Entypo} from "@expo/vector-icons";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 //data model?
@@ -148,7 +149,7 @@ const List = ({navigation}) => {
                             keyExtractor={(todo: Task) => todo.title} />
                     </View></>
             )}
-            <TouchableOpacity style={[styles.button, { backgroundColor: '#00FF00' }]} onPress={() => navigation.navigate('Commitments')}>
+            <TouchableOpacity style={[styles.button, { backgroundColor: '#2f68c4' }]} onPress={() => navigation.navigate('Commitments')}>
                 <Text style = {styles.buttonText}>Continue To Commitments</Text>
             </TouchableOpacity>
             <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
@@ -194,7 +195,8 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize:20,
         textAlign:'center',
-        fontFamily:'Apple SD Gothic Neo'
+        fontFamily:'Apple SD Gothic Neo',
+        color: '#fbfcde', 
     },
 
 

@@ -19,6 +19,10 @@ const CommitmentForm = ({navigation}) => {
 
 
   const handleSubmit = async() => {
+    if (event == '' || time == '' || timeEnd == ''){
+      alert('Please make sure all the boxes are filled');
+    }
+    else{
     time_split = time.search("-")
     formatted = event.concat("_"+ time + "_" + timeEnd)
     
@@ -33,7 +37,7 @@ const CommitmentForm = ({navigation}) => {
   setEvent("")
   setTime("")
   setTimeEnd("")
-
+  }
 };
 const generateschedule = () => {
   navigation.navigate("Schedule")
@@ -80,11 +84,11 @@ const generateschedule = () => {
       ))}
 
       
-      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#00FF00' }]} onPress={handleSubmit}>
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#2f68c4' }]} onPress={handleSubmit}>
                 <Text style = {globalStyles.buttonText}> Submit!</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#FF0000' }]} onPress={generateschedule}>
-                <Text style = {globalStyles.buttonText}> Generate Schedule!</Text>
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#b50704' }]} onPress={generateschedule}>
+                <Text style = {globalStyles.buttonText} > Generate Schedule!</Text>
       </TouchableOpacity>
     </View>
   );

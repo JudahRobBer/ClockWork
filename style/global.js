@@ -68,7 +68,7 @@ export const globalStyles = StyleSheet.create({
     containerCom: {
         height: 90, 
         backgroundColor: 'white',
-        alignItems: 'center', // This centers the children vertically
+        alignItems: 'center', 
         alignContent: 'center',
         marginBottom: 30,
         marginHorizontal:20,
@@ -83,7 +83,8 @@ export const globalStyles = StyleSheet.create({
       buttonText: {
         fontSize:20,
         textAlign:'center',
-        fontFamily:'Apple SD Gothic Neo'
+        fontFamily:'Apple SD Gothic Neo',
+        color: '#fbfcde',
     },
 
 
