@@ -10,7 +10,7 @@ import 'firebase/firestore'; // Import Firestore
 import 'firebase/auth'; // Import Firebase Authentication (if needed)
 
 
-const CommitmentForm = () => {
+const CommitmentForm = ({navigation}) => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
   const [formattedEvents,setFormattedEvents] = useState([]);
@@ -29,12 +29,17 @@ const handleSubmit = async() => {
     commitments: commitmentCopy,
 })
 
+
 setEvent("")
 setTime("")
     
     
 
   };
+
+const toschedule = () => {
+    navigation.navigate("Schedule")
+}
 
   return (
     <View >
@@ -60,6 +65,7 @@ setTime("")
         </View>
         
       <Button title="Submit" onPress={handleSubmit} />
+      <Button title="Finalize Schedule" onPress={toschedule} />
     </View>
   );
 };

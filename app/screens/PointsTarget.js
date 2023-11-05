@@ -25,7 +25,7 @@ export default function ReviewDetails({ navigation }) {
 
     console.log("success")
     
-    navigation.navigate("Tasks");
+    navigation.navigate("Todo List");
   }
   return (
     <View>
