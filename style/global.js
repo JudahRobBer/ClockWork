@@ -8,15 +8,15 @@ export const globalStyles = StyleSheet.create({
     container: {
         justifyContent: "center",
         height: 110,
-        
         flexDirection: 'row', // This makes the children elements align horizontally
         alignItems: 'center', // This centers the children vertically
         marginHorizontal:20,
+        
     },
     title: {
         fontSize: 40,
         textAlign: 'center',
-        marginTop: 60,
+        marginTop: 30,
         marginBottom: 30,
     },
     input: {
