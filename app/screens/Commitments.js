@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Platform } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Platform , TouchableOpacity} from 'react-native';
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
@@ -13,33 +13,28 @@ import 'firebase/auth'; // Import Firebase Authentication (if needed)
 const CommitmentForm = ({navigation}) => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
+  const [timeEnd, setTimeEnd] = useState('');
   const [formattedEvents,setFormattedEvents] = useState([]);
 
 
 
 const handleSubmit = async() => {
-  time_split = time.search("-")
-  formatted = event.concat("_"+ time.slice(0,time_split) + "_" + time.slice(time_split + 1))
-  
-  const commitmentCopy = formattedEvents
-  commitmentCopy.push(formatted)
-  
-  const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
-  await updateDoc(docRef, {
-    commitments: commitmentCopy,
-})
-
-
-setEvent("")
-setTime("")
+    time_split = time.search("-")
+    formatted = event.concat("_"+ time + "_" + timeEnd)
     
+    const commitmentCopy = formattedEvents
+    commitmentCopy.push(formatted)
     
+    const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+    await updateDoc(docRef, {
+      commitments: commitmentCopy,
+  })
 
-  };
+  setEvent("")
+  setTime("")
+  setTimeEnd("")
 
-const toschedule = () => {
-    navigation.navigate("Schedule")
-}
+};
 
   return (
     <View >
@@ -54,18 +49,33 @@ const toschedule = () => {
       </View>
 
       <View style = {globalStyles.containerCom}>
-        <Text style={globalStyles.label}>Enter time (Start - End):</Text>
+        <View style = {globalStyles.inputRow}>
+          <Text style={globalStyles.label}>Enter time (Start):</Text>
+            
+          <Text style={globalStyles.label}>Enter time (End):</Text>
+          
+        </View>
+
+        <View style = {[globalStyles.inputRow]}>
+            <TextInput
+              style={globalStyles.input}
+              placeholder = "Enter time"
+              onChangeText={setTime}
+              value={time}
+            />
           <TextInput
             style={globalStyles.input}
             placeholder = "Enter time"
-            onChangeText={setTime}
-            value={time}
-            keyboardType="numeric"
+            onChangeText={setTimeEnd}
+            value={timeEnd}
           />
         </View>
+      </View>
         
-      <Button title="Submit" onPress={handleSubmit} />
-      <Button title="Finalize Schedule" onPress={toschedule} />
+
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#00FF00' }]} onPress={handleSubmit}>
+                <Text style = {globalStyles.buttonText}>Generate Schedule!</Text>
+      </TouchableOpacity>
     </View>
   );
 };

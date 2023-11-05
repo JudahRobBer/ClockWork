@@ -58,22 +58,42 @@ const List = ({navigation}) => {
         
     }
 
+
     
 
 
     const renderTodo = ({item}) => {
-        
 
         const deleteItem = async() => {
-            deleteDoc(doc(FIRESTORE_DB,"todos",item.id));
-        };
-        
-        return (
-            <View style={styles.todoContainer}>
-                <Text style={styles.todoText}>{item.title}</Text>
-               
-                <Ionicons name="trash-bin-outline" size = {24} color = "red" onPress={deleteItem}/>
+            const tasksCopy = []
+            console.log(item.title, item.category, item.duration)
+            todos.forEach((cur) => {
+                
+                if (cur.title != item.title) {
+                    tasksCopy.push(cur)
+                }
+                else {
+                    console.log("detected")
+                }
+            });
 
+            await updateDoc(docRef, {
+                tasks: tasksCopy,
+            })
+            setTodos(tasksCopy)
+
+
+        };
+       
+
+        return (
+            
+
+            <View style={styles.todoContainer}>
+                <Text style={styles.titleText}>{item.title} </Text>
+                <Text style={styles.todoText} >{item.category}</Text>
+                <Text style={styles.todoText}>{item.duration}</Text>
+                <Ionicons name="trash-bin-outline" size = {24} color = "red" allign= "right" onPress={deleteItem}/>
             </View>
         );
     }
@@ -99,7 +119,7 @@ const List = ({navigation}) => {
         setTodo(""),
         setCategory("")
         setDuration("")
-        ;
+        
 
     }
     
@@ -119,15 +139,21 @@ const List = ({navigation}) => {
                 </View>
             </View>
             {todos.length > 0 && (
-            <View>
-                <FlatList 
-                data = {todos} 
-                renderItem={renderTodo}
-                keyExtractor={(todo:Todo) => todo.id}/>
-            </View>
+            
+            <><View style={styles.todoContainer}>
+                    <Text style={styles.titleText}>Title </Text>
+                    <Text style={styles.titleText}>Category </Text>
+                    <Text style={styles.titleText}>Duration </Text>
+                </View><View>
+                        <FlatList
+                            data={todos}
+                            renderItem={renderTodo}
+                            keyExtractor={(todo: Task) => todo.title} />
+                    </View></>
             )}
-            <Button onPress={() => navigation.navigate('Details')}title="Open Details" />
-            <Button onPress={() => navigation.navigate('Commitments')} title="Commitments"/>
+            <TouchableOpacity style={[styles.button, { backgroundColor: '#00FF00' }]} onPress={() => navigation.navigate('Commitments')}>
+                <Text style = {styles.buttonText}>Continue To Commitments</Text>
+            </TouchableOpacity>
             <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
         </View>
     );
@@ -162,10 +188,26 @@ const styles = StyleSheet.create({
 
 
     },
+
+    titleText: {
+        flex: 1,
+        paddingHorizontal:4,
+        fontSize:15,
+    },
+    buttonText: {
+        fontSize:20,
+        textAlign:'center',
+        fontFamily:'Apple SD Gothic Neo'
+    },
+
+
     todoText: {
         flex: 1,
         paddingHorizontal:4,
-        fontSize:20
+        fontSize:15,
+        marginLeft: 24,
+        
+        
 
     },
     todo: {
@@ -173,6 +215,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         fontFamily: "Optima",
         alignItems: 'center',
-    }
+        fontWeight:"400",
+    },
+    button: {
+        marginTop:40,
+        padding: 12,
+        marginBottom: 12,
+        borderRadius: 6,
+      }
 
 })

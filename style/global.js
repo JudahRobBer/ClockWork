@@ -11,6 +11,7 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         flexDirection: 'row', // This makes the children elements align horizontally
         alignItems: 'center', // This centers the children vertically
+        marginHorizontal:20,
     },
     title: {
         fontSize: 40,
@@ -24,6 +25,9 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
+        marginRight: 10,
+        marginLeft: 10,
+        
     },
     box: {
         flexDirection: 'row',
@@ -46,15 +50,41 @@ export const globalStyles = StyleSheet.create({
     label: {
         fontSize: 18,
         marginBottom: 5,
+        marginRight: 10,
+        marginLeft: 10,
+    },
+    inputRow: {
+        flexDirection: 'row', 
+        flex: 1,
+        justifyContent: 'space-between',
+        alignContent: 'center',
+        
+    },
+
+    rowSpacing: {
+        marginLeft: 10,
     },
     
     containerCom: {
-        height: 80,
+        height: 90, 
+        backgroundColor: 'white',
         alignItems: 'center', // This centers the children vertically
-        
-        
-        marginBottom: 5,
-    }
+        alignContent: 'center',
+        marginBottom: 30,
+        marginHorizontal:20,
+    },
+    button: {
+        marginTop:20,
+        padding: 12,
+        marginBottom: 12,
+        borderRadius: 6,
+      },
+    
+      buttonText: {
+        fontSize:20,
+        textAlign:'center',
+        fontFamily:'Apple SD Gothic Neo'
+    },
 
 
 
