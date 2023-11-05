@@ -65,7 +65,24 @@ const List = ({navigation}) => {
     const renderTodo = ({item}) => {
 
         const deleteItem = async() => {
-            deleteDoc(doc(FIRESTORE_DB,"todos",item.id));
+            const tasksCopy = []
+            console.log(item.title, item.category, item.duration)
+            todos.forEach((cur) => {
+                
+                if (cur.title != item.title) {
+                    tasksCopy.push(cur)
+                }
+                else {
+                    console.log("detected")
+                }
+            });
+
+            await updateDoc(docRef, {
+                tasks: tasksCopy,
+            })
+            setTodos(tasksCopy)
+
+
         };
        
 
@@ -102,7 +119,7 @@ const List = ({navigation}) => {
         setTodo(""),
         setCategory("")
         setDuration("")
-        ;
+        
 
     }
     
@@ -131,7 +148,7 @@ const List = ({navigation}) => {
                         <FlatList
                             data={todos}
                             renderItem={renderTodo}
-                            keyExtractor={(todo: Todo) => todo.id} />
+                            keyExtractor={(todo: Task) => todo.title} />
                     </View></>
             )}
             <Button onPress={() => navigation.navigate('Details')}title="Open Details" />
