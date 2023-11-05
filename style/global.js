@@ -7,8 +7,8 @@ export const globalStyles = StyleSheet.create({
       },
     container: {
         justifyContent: "center",
-        height: 120,
-        borderWidth: 1,
+        height: 110,
+        
         flexDirection: 'row', // This makes the children elements align horizontally
         alignItems: 'center', // This centers the children vertically
         marginHorizontal:20,
@@ -99,5 +99,22 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         textAlign: 'center',
       },
+    PTbox:{
+        justifyContent: "center",
+        height: 'auto',
+        width: 'auto',
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        margin: 15,
+        
+    },
+    container2: {
+        justifyContent: "center",
+        height: 100,
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        margin: 0,
+        
+    },
 
 } );
