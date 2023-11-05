@@ -168,7 +168,7 @@ export default function ShowSchedule({navigation}){
     return(
         <View style={style2.container}>
             <Text style={[globalStyles.title, {fontSize : 30, marginTop : 0}]}> This is Your Schedule!</Text>
-            <Text style ={[globalStyles.title, {fontSize : 20, marginTop : 0}]}>{totalPoints} </Text>
+            <Text style ={[globalStyles.title, {fontSize : 20, marginTop : 0}]}>{curPoints} / {totalPoints} </Text>
           
             <TableOfContents />
             <View style = {[globalStyles.box, {backgroundColor : "green", marginBottom : 10}]}>
