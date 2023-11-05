@@ -3,29 +3,113 @@ import { StyleSheet, View, Text, Button,Image, TouchableHighlight } from 'react-
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig"
 import CommitmentForm from './Commitments';
+import {useState,useEffect} from 'react';
+import {doc, getDoc} from "firebase/firestore"
+import {getAuth} from "firebase/auth"
 
 
 const TableOfContents = () => {
+  const [schedule, setSchedule] = useState([])
+  const [timeSchedule, setTimeSchedule] = useState([])
+  //generate a list of 15 minute intervals from 8 AM - 5 PM
+  //fill the array with the apropriete events
+
+  const parseStringCommitment = (commitment) => {
+    
+    //truly abhorent code
+    const title = commitment.slice(0,commitment.search("_"))
+    commitment = commitment.slice(commitment.search("_") + 1)
+    const start = commitment.slice(0,commitment.search("_"))
+    commitment = commitment.slice(commitment.search("_") + 1)
+    const end = commitment.slice(commitment.search("_") + 1)
+
+    const start_hour = parseInt(start.slice(0,start.search(":")))
+    const start_minutes = parseInt(start.slice(start.search(":") + 1))
+    const end_hour = parseInt(end.slice(0,start.search(":")))
+    const end_minutes = parseInt(start.slice(end.search(":") + 1))
+    return [start_hour,start_minutes,end_hour,end_minutes,title];
+  }
+
+  const generateArray = () => {
+    const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+        getDoc(docRef).then((docsnap) => {
+            if (docsnap.exists()) {
+                //get the data from database
+                const taskData = docsnap.get("tasks")
+                const commitmentData = docsnap.get("commitments")
+                //assuming a maximum work day of 8 - 20
+                //temporarySchedule[0] -> 8:00 - 9:00
+                const temporarySchedule = Array(12).fill("")
+                const temporaryTimeSchedule = Array(12).fill("")
+                commitmentData.forEach((commitment) => {
+                  const asList = parseStringCommitment(commitment)
+                  const startIndex = (asList[0] - 8)
+                  const endIndex = (asList[2] - 8)
+                  if (0 <= startIndex && startIndex < temporarySchedule.length && 0 <= endIndex && endIndex < temporarySchedule.length && startIndex < endIndex) {
+                    for (let i = startIndex; i < endIndex; i++){
+                      temporarySchedule[i] = asList[4]
+                      temporaryTimeSchedule[i] = asList[0] + ":" + asList[1] + "0" +"-" + (i + 9).toString() + ":00"  
+                    }
+                  }
+                })
+
+                taskData.forEach((task) => {
+                  let assigned = false
+                  let index = 0
+                  while (!assigned && index < temporarySchedule.length){
+                    //this is a valid hour
+                    if (temporarySchedule[index] == "") {
+                      assigned = true
+                      temporarySchedule[index] = task.title
+                      temporaryTimeSchedule[index] = (index + 8).toString() + ":00" +"-" + (index + 9).toString() + ":00"  
+                    }
+                  }
+                })
+                const filteredSchedule = []
+                
+                temporarySchedule.forEach((item) => {
+                  if (item != ""){
+                    filteredSchedule.push(item)
+                  }
+                })
+                const filteredTimeSchedule = []
+                temporaryTimeSchedule.forEach((item) => {
+                  if (item != ""){
+                    filteredTimeSchedule.push(item)
+                  }
+                })
+                setSchedule(filteredSchedule)
+                setTimeSchedule(filteredTimeSchedule)
+            }
+
+            })
+  }
+
+  useEffect(() => {
+    generateArray()
+  },[])
+  
+
     return (
       <View style={[styles.container, {marginTop : 40}]}>
         <View style={styles.column}>
-          <Text style={styles.header}>Events</Text>
-          <Text style={globalStyles.text}>Event 1</Text>
-          <Text style={globalStyles.text}>Event 2</Text>
-          <Text style={globalStyles.text}>Event 3</Text>
-          <Text style={globalStyles.text}>Event 4</Text>
-          <Text style={globalStyles.text}>Event 5</Text>
-          <Text style={globalStyles.text}>Event 6</Text>
-          {/* Add more events here */}
+          {schedule.map((event) => {
+            return (
+              <Text style = {globalStyles.text}>{event}</Text>
+            );
+            
+          })}
+          
+          
         </View>
-  
+          
         <View style={styles.column}>
-          <Text style={styles.header}>Scheduled Time</Text>
-          <Text style={globalStyles.text}>9:00 AM</Text>
-          <Text style={globalStyles.text}>10:30 AM</Text>
-          <Text style={globalStyles.text}>10:30 AM</Text>
-          <Text style={globalStyles.text}>10:30 AM</Text>
-          {/* Add corresponding scheduled times here */}
+          {timeSchedule.map((event) => {
+            return (
+              <Text style = {globalStyles.text}>{event}</Text>
+            );
+            
+          })}
         </View>
       </View>
     );
@@ -62,19 +146,7 @@ const style2 = StyleSheet.create({
 });
 
 export default function ShowSchedule({navigation}){
-    // const currentUser = getAuth().currentUser;
-    // const userID = currentUser.userID;
-    // const docRef = doc(FIRESTORE_DB, "users", userID)
-
-    class FormattedTime {
-        constructor(stringForm) {
-            this.title = stringForm.slice(0,stringForm.search("_"))
-            stringForm = stringForm.slice(stringForm.search("_" + 1))
-            this.start = stringForm.slice(0,stringForm.slice(stringForm.search("_")))
-            stringForm = stringForm.slice(stringForm.search("_" + 1))
-            this.end = stringForm
-        }
-    }
+ 
     return(
         <View style={style2.container}>
             <Text style={[globalStyles.title, {fontSize : 30, marginTop : -200}]}> This is Your Schedule!</Text>

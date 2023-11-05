@@ -27,12 +27,16 @@ function InsideLayout () {
             if (docsnap.exists()) {
                setPath("Tasks")
             }
+            else{
+              console.log("Fail")
+            }
         })
+
     
 
   return (
-
-    <insideStack.Navigator initialRouteName= {path}> 
+    
+    <insideStack.Navigator initialRouteName={path}> 
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
       <insideStack.Screen name = "Tasks" component={List}/>
       <insideStack.Screen name ="Commtiments" component = {Commitments}/>

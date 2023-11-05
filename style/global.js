@@ -44,7 +44,7 @@ export const globalStyles = StyleSheet.create({
         width: 50,
     },
     text: {
-        fontSize: 20,
+        fontSize: 18,
         textAlign: 'center',
     },
     label: {
