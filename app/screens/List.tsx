@@ -24,32 +24,15 @@ const List = ({navigation}) => {
     //mutate and acces list data
     const [todos,setTodos] = useState([]);
     const [todo,setTodo] = useState("");
+    const [category,setCategory] = useState("");
+    const [duration, setDuration] = useState(null);
 
 
     //The user authentication is linked to the database with UID
     const currentUserUID = getAuth().currentUser.uid;
     const docRef = doc(FIRESTORE_DB,"users",currentUserUID);
     
-    //triggered on updates
-    //get all of the task data from the user document
-    /*
-    useEffect(() => {
-       const todoRef = collection(FIRESTORE_DB,"todos");
-       const subscriber = onSnapshot(todoRef,{
-        next: (snapshot)=> {
-            const todos = [];
-            snapshot.docs.forEach((doc) => {
-                todos.push({
-                    id: doc.id,
-                    ...doc.data(),
-                } as Todo);
-            });
-            setTodos(todos);
-        },
-       });
-       return () => subscriber();
-    },[]);
-    */
+    
     
     useEffect(() => {
         getUserTasks()
@@ -80,11 +63,6 @@ const List = ({navigation}) => {
 
     const renderTodo = ({item}) => {
         
-        const toggleDone = async() => {
-            await updateDoc(doc(FIRESTORE_DB,'todos',item.id), 
-            {done: !item.done});
-            
-        };
 
         const deleteItem = async() => {
             deleteDoc(doc(FIRESTORE_DB,"todos",item.id));
@@ -92,12 +70,8 @@ const List = ({navigation}) => {
         
         return (
             <View style={styles.todoContainer}>
-                <TouchableOpacity onPress ={toggleDone} style = {styles.todo}>
-                    {item.done && <Ionicons name="md-checkmark-circle"/>}
-                    {!item.done && <Entypo name ="circle" size={24} color = "black"/>}       
-                
-                    <Text style={styles.todoText}>{item.title}</Text>
-                </TouchableOpacity>
+                <Text style={styles.todoText}>{item.title}</Text>
+               
                 <Ionicons name="trash-bin-outline" size = {24} color = "red" onPress={deleteItem}/>
 
             </View>
@@ -112,19 +86,37 @@ const List = ({navigation}) => {
     const addTask= async() => {
         const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
         const taskCopy = todos
-        taskCopy.push({title:todo, done:false})
+        taskCopy.push({title:todo,
+            done:false,
+            category:category,
+            start_time: 0o0,
+            end_time: 0o0,
+            duration: duration
+            })
         await updateDoc(docRef, {
-            tasks: taskCopy
+            tasks: taskCopy,
         })
-        setTodo("");
+        setTodo(""),
+        setCategory("")
+        setDuration("")
+        ;
+
     }
     
     return (
         <View style= {styles.container}>
             <View style = {styles.form}>
-                <TextInput style = {styles.input} placeholder = "Add Todo"
+                <TextInput style = {styles.input} placeholder = "Task"  textAlign = "center" // copy buttons for more options
                 onChangeText = {(text) => setTodo(text)} value = {todo}/>
-                <Button onPress = {addTask} title="Add Todo" disabled={todo === ""}/>
+
+                <TextInput style = {styles.input} placeholder = "Category" textAlign = "center"
+                onChangeText = {(text) => setCategory(text)} value = {category}/>
+
+                <TextInput style = {styles.input} placeholder = "Duration"  textAlign = "center"
+                onChangeText = {(number) => setDuration(number)} value = {duration}/>
+                <View>
+                    <Button  onPress = {addTask} title="Enter Task" disabled={todo === ""}/>
+                </View>
             </View>
             {todos.length > 0 && (
             <View>
@@ -155,9 +147,11 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         height: 40,
-        borderWidth: 1,
-        borderRadius: 4,
+        borderWidth: 2,
+        borderRadius: 10,
         backgroundColor:"#fff",
+        marginVertical: 2,
+        marginHorizontal: 5,
     },
     todoContainer: {
         flexDirection: 'row',
@@ -171,11 +165,13 @@ const styles = StyleSheet.create({
     todoText: {
         flex: 1,
         paddingHorizontal:4,
+        fontSize:20
 
     },
     todo: {
         flex: 1,
         flexDirection: 'row',
+        fontFamily: "Optima",
         alignItems: 'center',
     }
 
