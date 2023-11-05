@@ -151,8 +151,9 @@ const List = ({navigation}) => {
                             keyExtractor={(todo: Task) => todo.title} />
                     </View></>
             )}
-            <Button onPress={() => navigation.navigate('Details')}title="Open Details" />
-            <Button onPress={() => navigation.navigate('Commitments')} title="Commitments"/>
+            <TouchableOpacity style={[styles.button, { backgroundColor: '#00FF00' }]} onPress={() => navigation.navigate('Commitments')}>
+                <Text style = {styles.buttonText}>Continue To Commitments</Text>
+            </TouchableOpacity>
             <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
         </View>
     );
@@ -192,7 +193,11 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal:4,
         fontSize:15,
-
+    },
+    buttonText: {
+        fontSize:20,
+        textAlign:'center',
+        fontFamily:'Apple SD Gothic Neo'
     },
 
 
@@ -210,6 +215,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         fontFamily: "Optima",
         alignItems: 'center',
-    }
+        fontWeight:"400",
+    },
+    button: {
+        marginTop:40,
+        padding: 12,
+        marginBottom: 12,
+        borderRadius: 6,
+      }
 
 })

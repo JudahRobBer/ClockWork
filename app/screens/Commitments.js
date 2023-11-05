@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Platform } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Platform , TouchableOpacity} from 'react-native';
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
@@ -19,21 +19,22 @@ const CommitmentForm = () => {
 
 
 const handleSubmit = async() => {
-  time_split = time.search("-")
-  formatted = event.concat("_"+ time.slice(0,time_split) + "_" + time.slice(time_split + 1))
-  
-  const commitmentCopy = formattedEvents
-  commitmentCopy.push(formatted)
-  
-  const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
-  await updateDoc(docRef, {
-    commitments: commitmentCopy,
-})
+    time_split = time.search("-")
+    formatted = event.concat("_"+ time + "_" + timeEnd)
+    
+    const commitmentCopy = formattedEvents
+    commitmentCopy.push(formatted)
+    
+    const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+    await updateDoc(docRef, {
+      commitments: commitmentCopy,
+  })
 
-setEvent("")
-setTime("")
+  setEvent("")
+  setTime("")
+  setTimeEnd("")
 
-  };
+};
 
   return (
     <View >
@@ -71,7 +72,10 @@ setTime("")
         </View>
       </View>
         
-      <Button title="Submit" onPress={handleSubmit} />
+
+      <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#00FF00' }]} onPress={handleSubmit}>
+                <Text style = {globalStyles.buttonText}>Generate Schedule!</Text>
+      </TouchableOpacity>
     </View>
   );
 };

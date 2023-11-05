@@ -11,6 +11,7 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         flexDirection: 'row', // This makes the children elements align horizontally
         alignItems: 'center', // This centers the children vertically
+        marginHorizontal:20,
     },
     title: {
         fontSize: 40,
@@ -69,8 +70,21 @@ export const globalStyles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems: 'center', // This centers the children vertically
         alignContent: 'center',
-        marginBottom: 5,
-    }
+        marginBottom: 30,
+        marginHorizontal:20,
+    },
+    button: {
+        marginTop:20,
+        padding: 12,
+        marginBottom: 12,
+        borderRadius: 6,
+      },
+    
+      buttonText: {
+        fontSize:20,
+        textAlign:'center',
+        fontFamily:'Apple SD Gothic Neo'
+    },
 
 
 
