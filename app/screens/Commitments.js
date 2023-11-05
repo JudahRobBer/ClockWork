@@ -22,6 +22,15 @@ const CommitmentForm = ({navigation}) => {
     if (event == '' || time == '' || timeEnd == ''){
       alert('Please make sure all the boxes are filled');
     }
+    else if (parseInt(time.slice(0,time.search(":")) >= parseInt(timeEnd.slice(0,timeEnd.search(":")))))
+    {
+      alert("Please Enter a valid Interval")
+    }
+    else if (time.slice(time.search(":")+1) != "00" || time.slice(time.search(":") + 1) != "00")
+    {
+      alert("We are only handling hour intervals on the hour at this time!")
+    }
+
     else{
     time_split = time.search("-")
     formatted = event.concat("_"+ time + "_" + timeEnd)

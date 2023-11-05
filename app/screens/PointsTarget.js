@@ -14,9 +14,11 @@ export default function ReviewDetails({ navigation }) {
 
   useEffect(() => {
     const currentUser = getAuth().currentUser
-    const userUID = currentUser.uid
-    const docRef = doc(FIRESTORE_DB, "users",userUID)
-    updateDoc(docRef, {goal_points: points})
+    if (currentUser != null) {
+      const userUID = currentUser.uid
+      const docRef = doc(FIRESTORE_DB, "users",userUID)
+      updateDoc(docRef, {goal_points: points})
+    }
   },[points])
 
 
