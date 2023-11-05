@@ -6,6 +6,7 @@ import CommitmentForm from './Commitments';
 import {useState,useEffect} from 'react';
 import {doc, getDoc, updateDoc} from "firebase/firestore"
 import {getAuth} from "firebase/auth"
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 const TableOfContents = () => {
@@ -128,7 +129,8 @@ const TableOfContents = () => {
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row', // Arrange the columns horizontally
-      padding: 10, // Add padding to the container to separate it from the edges
+      padding: 10, 
+      
     },
     column: {
       flex: 1, // Make each column take an equal amount of space
@@ -278,7 +280,7 @@ export default function ShowSchedule({navigation}){
     return(
         <View style={style2.container}>
             <Text style={[globalStyles.title, {fontSize : 30, marginTop : 0}]}> This is Your Schedule!</Text>
-            <Text style ={[globalStyles.title, {fontSize : 20, marginTop : 0}]}>{curPoints} / {totalPoints} </Text>
+            <Text style ={[globalStyles.title, {fontSize : 20, marginTop : 0}]}>{ 'Points Summary: '+ curPoints + '/' + totalPoints} </Text>
           
             <View style={[styles.container, {marginTop : 40}]}>
         <View style={styles.column}>

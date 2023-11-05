@@ -119,8 +119,12 @@ export const globalStyles = StyleSheet.create({
         height: 100,
         flexDirection: 'row', 
         alignItems: 'center', 
-        margin: 0,
-        
+        margin: 0,  
+    },
+    container3:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
 } );
