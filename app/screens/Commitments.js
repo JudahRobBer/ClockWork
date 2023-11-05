@@ -77,5 +77,3 @@ setTime("")
 };
 
 export default CommitmentForm;
-
-

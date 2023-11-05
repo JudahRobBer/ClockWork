@@ -58,22 +58,42 @@ const List = ({navigation}) => {
         
     }
 
+
     
 
 
     const renderTodo = ({item}) => {
-        
 
         const deleteItem = async() => {
-            deleteDoc(doc(FIRESTORE_DB,"todos",item.id));
-        };
-        
-        return (
-            <View style={styles.todoContainer}>
-                <Text style={styles.todoText}>{item.title}</Text>
-               
-                <Ionicons name="trash-bin-outline" size = {24} color = "red" onPress={deleteItem}/>
+            const tasksCopy = []
+            console.log(item.title, item.category, item.duration)
+            todos.forEach((cur) => {
+                
+                if (cur.title != item.title) {
+                    tasksCopy.push(cur)
+                }
+                else {
+                    console.log("detected")
+                }
+            });
 
+            await updateDoc(docRef, {
+                tasks: tasksCopy,
+            })
+            setTodos(tasksCopy)
+
+
+        };
+       
+
+        return (
+            
+
+            <View style={styles.todoContainer}>
+                <Text style={styles.titleText}>{item.title} </Text>
+                <Text style={styles.todoText} >{item.category}</Text>
+                <Text style={styles.todoText}>{item.duration}</Text>
+                <Ionicons name="trash-bin-outline" size = {24} color = "red" allign= "right" onPress={deleteItem}/>
             </View>
         );
     }
@@ -99,7 +119,7 @@ const List = ({navigation}) => {
         setTodo(""),
         setCategory("")
         setDuration("")
-        ;
+        
 
     }
     
@@ -119,12 +139,17 @@ const List = ({navigation}) => {
                 </View>
             </View>
             {todos.length > 0 && (
-            <View>
-                <FlatList 
-                data = {todos} 
-                renderItem={renderTodo}
-                keyExtractor={(todo:Todo) => todo.id}/>
-            </View>
+            
+            <><View style={styles.todoContainer}>
+                    <Text style={styles.titleText}>Title </Text>
+                    <Text style={styles.titleText}>Category </Text>
+                    <Text style={styles.titleText}>Duration </Text>
+                </View><View>
+                        <FlatList
+                            data={todos}
+                            renderItem={renderTodo}
+                            keyExtractor={(todo: Task) => todo.title} />
+                    </View></>
             )}
             <Button onPress={() => navigation.navigate('Details')}title="Open Details" />
             <Button onPress={() => navigation.navigate('Commitments')} title="Commitments"/>
@@ -162,10 +187,22 @@ const styles = StyleSheet.create({
 
 
     },
+
+    titleText: {
+        flex: 1,
+        paddingHorizontal:4,
+        fontSize:15,
+
+    },
+
+
     todoText: {
         flex: 1,
         paddingHorizontal:4,
-        fontSize:20
+        fontSize:15,
+        marginLeft: 24,
+        
+        
 
     },
     todo: {
