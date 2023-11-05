@@ -4,16 +4,16 @@ import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig"
 import CommitmentForm from './Commitments';
 import {useState,useEffect} from 'react';
-import {doc, getDoc} from "firebase/firestore"
+import {doc, getDoc, updateDoc} from "firebase/firestore"
 import {getAuth} from "firebase/auth"
 
 
 const TableOfContents = () => {
   const [schedule, setSchedule] = useState([])
   const [timeSchedule, setTimeSchedule] = useState([])
-  //generate a list of 15 minute intervals from 8 AM - 5 PM
-  //fill the array with the apropriete events
+  
 
+  //handle schedule parsing
   const parseStringCommitment = (commitment) => {
     
     //truly abhorent code
@@ -146,10 +146,30 @@ const style2 = StyleSheet.create({
 });
 
 export default function ShowSchedule({navigation}){
- 
+  
+  
+  const [curPoints,SetCurPoints] = useState(0)
+  const [totalPoints, setTotalPoints] = useState(0)
+
+  
+
+  useEffect(() => {
+    const currentUser = getAuth().currentUser
+    const userUID = currentUser.uid
+    const docRef = doc(FIRESTORE_DB, "users",userUID)
+    getDoc(docRef).then((docsnap) => {
+      if (docsnap.exists()) {
+          console.log(docsnap.get("goal_points"))
+          setTotalPoints(docsnap.get("goal_points"))
+    }})
+  },[curPoints])
+
+
     return(
         <View style={style2.container}>
             <Text style={[globalStyles.title, {fontSize : 30, marginTop : -200}]}> This is Your Schedule!</Text>
+            <Text style ={[globalStyles.title, {fontSize : 20, marginTop : -200}]}>{totalPoints} </Text>
+          
             <TableOfContents />
             <View style = {[globalStyles.box, {backgroundColor : "green", marginBottom : 10}]}>
                 <Button
