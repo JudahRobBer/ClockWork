@@ -6,8 +6,9 @@ export const globalStyles = StyleSheet.create({
         height: 50,
       },
     container: {
-        marginLeft: 80,
+        justifyContent: "center",
         height: 120,
+        borderWidth: 1,
         flexDirection: 'row', // This makes the children elements align horizontally
         alignItems: 'center', // This centers the children vertically
     },
@@ -27,9 +28,12 @@ export const globalStyles = StyleSheet.create({
     box: {
         flexDirection: 'row',
         alignItems: 'center',
+        alignself: 'center',
         borderWidth: 1, // Add a border to the box (you can customize border styles)
         padding: 10, // Add padding around the content inside the box
         borderRadius: 10, // Add rounded corners to the box
+        justifyContent: "center"
+
     },
     img: {
         height: 50,
@@ -39,13 +43,19 @@ export const globalStyles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
     },
-
-
     label: {
         fontSize: 18,
+        marginBottom: 5,
+    },
+    
+    containerCom: {
+        height: 80,
+        alignItems: 'center', // This centers the children vertically
+        
+        
         marginBottom: 5,
     }
 
 
 
-});
+} );

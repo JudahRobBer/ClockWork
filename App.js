@@ -7,6 +7,7 @@ import Login from "./app/screens/Login"
 import Commitments from "./app/screens/Commitments"
 import PointsTarget from "./app/screens/PointsTarget"
 import Details from "./app/screens/Details"
+import Schedule from "./app/screens/Schedule"
 import {FIREBASE_AUTH, FIRESTORE_DB} from "./firebaseConfig"
 import {User, onAuthStateChanged, getAuth} from "firebase/auth"
 import {addDoc, collection, doc,getDoc} from "firebase/firestore"
@@ -57,6 +58,7 @@ export default function App() {
         <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}}/>
         <insideStack.Screen name = "Todo List" component={List}/>
         <insideStack.Screen name = "Commitments" component={Commitments} options={{headerLeft: () => null,}}/>
+        <insideStack.Screen name = "Schedule" component={Schedule} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
