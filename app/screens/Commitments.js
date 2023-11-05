@@ -18,7 +18,7 @@ const CommitmentForm = () => {
 
 
 
-const handleSubmit = async() => {
+  const handleSubmit = async() => {
     time_split = time.search("-")
     formatted = event.concat("_"+ time + "_" + timeEnd)
     
@@ -34,7 +34,10 @@ const handleSubmit = async() => {
   setTime("")
   setTimeEnd("")
 
-};
+  };
+
+  
+
 
   return (
     <View >
@@ -71,6 +74,8 @@ const handleSubmit = async() => {
           />
         </View>
       </View>
+
+      
         
 
       <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#00FF00' }]} onPress={handleSubmit}>

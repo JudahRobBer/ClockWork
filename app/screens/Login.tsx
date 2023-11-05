@@ -73,7 +73,6 @@ const Login = ({navigation}) => {
                 worktime: [],
                 });
 
-            console.log("success")
         } catch (error) {
             console.log(error);
         } finally {

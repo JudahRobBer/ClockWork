@@ -31,7 +31,8 @@ function InsideLayout () {
     
 
   return (
-    <insideStack.Navigator initialRouteName="PointsTarget"> 
+
+    <insideStack.Navigator initialRouteName= {path}> 
       <insideStack.Screen name="PointsTarget" component={PointsTarget} option={{headerShown:false}} />
       <insideStack.Screen name = "Tasks" component={List}/>
       <insideStack.Screen name ="Commtiments" component = {Commitments}/>
