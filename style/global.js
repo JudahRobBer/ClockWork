@@ -86,6 +86,17 @@ export const globalStyles = StyleSheet.create({
         fontFamily:'Apple SD Gothic Neo'
     },
 
-
+    tableRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+      },
+    
+    tableCell: {
+        flex: 1,
+        textAlign: 'center',
+      },
 
 } );
