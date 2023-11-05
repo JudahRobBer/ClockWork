@@ -28,6 +28,9 @@ const handleSubmit = async() => {
   await updateDoc(docRef, {
     commitments: commitmentCopy,
 })
+
+setEvent("")
+setTime("")
     
     
 
