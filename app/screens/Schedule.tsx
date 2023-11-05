@@ -95,7 +95,7 @@ const TableOfContents = () => {
         <View style={styles.column}>
           {schedule.map((event) => {
             return (
-              <Text style = {globalStyles.text}>{event}</Text>
+              <Text style = {[globalStyles.text, {textAlign:"left",fontSize : 20,}]}>{event}</Text>
             );
             
           })}
@@ -106,7 +106,7 @@ const TableOfContents = () => {
         <View style={styles.column}>
           {timeSchedule.map((event) => {
             return (
-              <Text style = {globalStyles.text}>{event}</Text>
+              <Text style={globalStyles.text}>{event}</Text>
             );
             
           })}
@@ -159,9 +159,9 @@ export default function ShowSchedule({navigation}){
     const docRef = doc(FIRESTORE_DB, "users",userUID)
     getDoc(docRef).then((docsnap) => {
       if (docsnap.exists()) {
-          console.log(docsnap.get("goal_points"))
           setTotalPoints(docsnap.get("goal_points"))
     }})
+    updateDoc(docRef, {current_points: curPoints})
   },[curPoints])
 
 
