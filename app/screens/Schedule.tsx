@@ -70,7 +70,8 @@ export default function Schedule({navigation}){
                      onPress={() => navigation.navigate("Commitments")} title="Add More Commitments" color='white'
                 />
             </View>
-            <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout"/>
+            <Button title='Log Out' onPress={() =>{FIREBASE_AUTH.signOut(), 
+                                                    navigation.navigate('Login')}}/>
         </View>
     );
 }
