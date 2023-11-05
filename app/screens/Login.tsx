@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Text, View, Button, StyleSheet, TextInput, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
+import { Image, View, Button, StyleSheet, TextInput, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
 import {FIREBASE_AUTH, FIRESTORE_DB} from "../../firebaseConfig";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from "firebase/auth"
 import {doc, addDoc, collection,setDoc} from "firebase/firestore"
@@ -11,7 +11,7 @@ export interface Task{
     duration: number,
     category:string,
     location: string,
-    status: boolean,
+    done: boolean,
     start_time: number,
     end_time: number
 }
@@ -84,8 +84,11 @@ const Login = ({navigation}) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
             <KeyboardAvoidingView behavior ="padding">
+                <View style= {styles.imageWrapper} >
+                <Image source= {require("../../assets/logo.png")} style={{height:180,width:180}} />
+                </View>
                 <TextInput value = {email}style = {styles.input} placeholder = "Email" autoCapitalize="none"
                 onChangeText= {(text) => setEmail(text)}></TextInput>
                 <TextInput value = {password} style = {styles.input} placeholder = "Password" autoCapitalize="none"
@@ -108,13 +111,19 @@ export default Login;
 
 const styles = StyleSheet.create({
     container: {
-        marginHorizontal: 20,
+        alignItems: 'center',
         flex:1,
+        justifyContent: "center",
+        backgroundColor:"#dadada",
+    },
+    imageWrapper : {
+        marginTop: -50,
         justifyContent: "center",
     },
     input: {
-        marginVertical: 10,
+        marginVertical: 20,
         height: 50,
+  
         borderWidth: 1,
         borderRadius: 4,
         padding: 10,
