@@ -60,6 +60,12 @@ export const globalStyles = StyleSheet.create({
         alignContent: 'center',
         
     },
+    scheduleText: {
+        fontSize: 40,
+        textAlign: 'left',
+        marginTop: 60,
+        marginBottom: 30,
+    },
 
     rowSpacing: {
         marginLeft: 10,
