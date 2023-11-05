@@ -45,7 +45,9 @@ const Login = ({navigation}) => {
         setLoading(true);
         try {
             const response = await signInWithEmailAndPassword(auth,email,password);
-            navigation.navigate('PointsTarget')
+
+            navigation.navigate('Tasks')
+
         } catch (error) {
             alert("Login Failed" + error.message);
         } finally {
