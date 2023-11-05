@@ -13,6 +13,7 @@ import 'firebase/auth'; // Import Firebase Authentication (if needed)
 const CommitmentForm = () => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
+  const [timeEnd, setTimeEnd] = useState('');
   const [formattedEvents,setFormattedEvents] = useState([]);
 
 
@@ -31,8 +32,6 @@ const handleSubmit = async() => {
 
 setEvent("")
 setTime("")
-    
-    
 
   };
 
@@ -49,15 +48,28 @@ setTime("")
       </View>
 
       <View style = {globalStyles.containerCom}>
-        <Text style={globalStyles.label}>Enter time (Start - End):</Text>
+        <View style = {globalStyles.inputRow}>
+          <Text style={globalStyles.label}>Enter time (Start):</Text>
+            
+          <Text style={globalStyles.label}>Enter time (End):</Text>
+          
+        </View>
+
+        <View style = {[globalStyles.inputRow]}>
+            <TextInput
+              style={globalStyles.input}
+              placeholder = "Enter time"
+              onChangeText={setTime}
+              value={time}
+            />
           <TextInput
             style={globalStyles.input}
             placeholder = "Enter time"
-            onChangeText={setTime}
-            value={time}
-            keyboardType="numeric"
+            onChangeText={setTimeEnd}
+            value={timeEnd}
           />
         </View>
+      </View>
         
       <Button title="Submit" onPress={handleSubmit} />
     </View>

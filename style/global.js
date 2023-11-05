@@ -24,6 +24,9 @@ export const globalStyles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
+        marginRight: 10,
+        marginLeft: 10,
+        
     },
     box: {
         flexDirection: 'row',
@@ -46,13 +49,26 @@ export const globalStyles = StyleSheet.create({
     label: {
         fontSize: 18,
         marginBottom: 5,
+        marginRight: 10,
+        marginLeft: 10,
+    },
+    inputRow: {
+        flexDirection: 'row', 
+        flex: 1,
+        justifyContent: 'space-between',
+        alignContent: 'center',
+        
+    },
+
+    rowSpacing: {
+        marginLeft: 10,
     },
     
     containerCom: {
-        height: 80,
+        height: 90, 
+        backgroundColor: 'white',
         alignItems: 'center', // This centers the children vertically
-        
-        
+        alignContent: 'center',
         marginBottom: 5,
     }
 
