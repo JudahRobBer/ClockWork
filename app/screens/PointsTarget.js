@@ -34,15 +34,9 @@ export default function ReviewDetails({ navigation }) {
     
     <View style  = {globalStyles.container2}>
       <TouchableHighlight
-<<<<<<< HEAD
-        style={globalStyles.container}
-        underlayColor="lightgray" // Change the background color when pressed
-        onPress={() => {setPoints(20); pressHandlernext() }}
-=======
         style={globalStyles.PTbox}
         underlayColor="lightgray" 
         onPress={() => {pressHandlernext(); setPoints(20) }}
->>>>>>> b5cbcc3d063e48f7e37f7d989c12994965c6ae5f
       >
         <View style={globalStyles.box}>
           <Image source={require('../../assets/20_pts.png')} style={{height:50,width:50}} />
