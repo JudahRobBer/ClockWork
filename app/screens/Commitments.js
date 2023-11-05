@@ -18,7 +18,7 @@ const CommitmentForm = ({navigation}) => {
 
 
 
-const handleSubmit = async() => {
+  const handleSubmit = async() => {
     time_split = time.search("-")
     formatted = event.concat("_"+ time + "_" + timeEnd)
     

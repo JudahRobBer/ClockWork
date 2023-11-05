@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button,Image, TouchableHighlight } from 'react-native';
 import { globalStyles } from '../../style/global';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig"
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
 import {getAuth} from "firebase/auth"
@@ -10,22 +10,21 @@ import {getAuth} from "firebase/auth"
 
 
 export default function ReviewDetails({ navigation }) {
-  const [points,setPoint] = useState(null)
+  const [points,setPoints] = useState(0)
 
-  
+  useEffect(() => {
+    const currentUser = getAuth().currentUser
+    const userUID = currentUser.uid
+    const docRef = doc(FIRESTORE_DB, "users",userUID)
+    updateDoc(docRef, {goal_points: points})
+  },[points])
+
 
   const pressHandler = () => {
     navigation.navigate("Login");
   }
   const pressHandlernext = async() => {
-    const currentUser = getAuth().currentUser
-    const userUID = currentUser.uid
-    const docRef = doc(FIRESTORE_DB, "users",userUID)
-    const updateUser = await updateDoc(docRef, {goal_points: points})
-
-    console.log("success")
-    
-    navigation.navigate("Todo List");
+    navigation.navigate("Tasks");
   }
   return (
     <View>
@@ -35,7 +34,7 @@ export default function ReviewDetails({ navigation }) {
       <TouchableHighlight
         style={globalStyles.container}
         underlayColor="lightgray" // Change the background color when pressed
-        onPress={() => {setPoint(20); pressHandlernext()}}
+        onPress={() => {pressHandlernext(); setPoints(20) }}
       >
         <View style={globalStyles.box}>
           <Image source={require('../../assets/20_pts.png')} style={{height:50,width:50}} />
@@ -45,7 +44,7 @@ export default function ReviewDetails({ navigation }) {
       <TouchableHighlight
         style={globalStyles.container}
         underlayColor="lightgray" // Change the background color when pressed
-        onPress={() => {setPoint(40); pressHandlernext()}}
+        onPress={() => {pressHandlernext(); setPoints(40)}}
       >
         <View style={globalStyles.box}>
           <Image source={require('../../assets/40_pts.png')} style={{height:50,width:50}} />
@@ -55,7 +54,7 @@ export default function ReviewDetails({ navigation }) {
       <TouchableHighlight
         style={[globalStyles.container, {marginBottom: 100}]}
         underlayColor="lightgray" // Change the background color when pressed
-        onPress={() => {setPoint(60); pressHandlernext()}}
+        onPress={() => {pressHandlernext(); setPoints(60) }}
       >
         <View style={globalStyles.box}>
           <Image source={require('../../assets/60_pts.png')} style={{height:50,width:50}} />

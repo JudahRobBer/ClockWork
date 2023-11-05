@@ -48,8 +48,6 @@ const List = ({navigation}) => {
                     taskArray.push(task)
                 })
 
-                
-                console.log("Task Data",tasks)
                 setTodos(taskArray)
             } else  {
                 console.log("Tasks not found")
@@ -66,7 +64,6 @@ const List = ({navigation}) => {
 
         const deleteItem = async() => {
             const tasksCopy = []
-            console.log(item.title, item.category, item.duration)
             todos.forEach((cur) => {
                 
                 if (cur.title != item.title) {
