@@ -3,16 +3,27 @@ import { View, Text, TextInput, Button, StyleSheet, Platform } from 'react-nativ
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
+import {getAuth} from "firebase/auth"
 
 
 const CommitmentForm = () => {
   const [event, setEvent] = useState('');
   const [time, setTime] = useState('');
+  const [formattedEvents,setFormattedEvents] = useState([]);
 
 
-  const handleSubmit = () => {
-    console.log('Task:', task);
-    console.log('Time:', time);
+  const handleSubmit = async() => {
+  
+    time_split = time.search("-")
+    formatted = event.concat("_"+ time.slice(0,time_split) + "_" + time.slice(time_split + 1))
+    
+    const commitmentCopy = formattedEvents
+    commitmentCopy.push(formatted)
+    
+    const docRef = doc(FIRESTORE_DB, "users", getAuth().currentUser.uid);
+    await updateDoc(docRef, {
+      commitments: commitmentCopy,
+  })
   };
 
   return (
