@@ -262,12 +262,12 @@ export default function ShowSchedule({navigation}){
         SetCurPoints(curPoints + 10)
         const index = schedule.findIndex((element) => element == item )
         
-        console.log(index)
+  
         const copy = schedule
         delete copy[index]
-        
         setSchedule(copy)
-        delete timeSchedule[index]
+        
+        
         const timeCopy = timeSchedule
         delete timeCopy[index]
         setTimeSchedule(timeCopy)
