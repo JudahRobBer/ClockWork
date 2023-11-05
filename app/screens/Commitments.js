@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Platform , TouchableOpacity} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Platform , TouchableOpacity, FlatList} from 'react-native';
 import { globalStyles } from '../../style/global';
 import {FIRESTORE_DB, FIREBASE_AUTH} from "../../firebaseConfig";
 import {getDoc,doc,collection, updateDoc} from "firebase/firestore"
@@ -79,10 +79,19 @@ const generateschedule = () => {
         </View>
       </View>
 
-      {formattedEvents.map((event, index) => (
-      <Text style={globalStyles.text} key={index}>{`${index +  1}. ${event.split('_')[0]} from ${event.split('_')[1]} to ${event.split('_')[2]}`}</Text>
-      ))}
-
+      <FlatList
+        data={formattedEvents}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({item, index }) => (
+          <View style={globalStyles.tableRow}>
+            <Text style={globalStyles.tableCell}>{item.split('_')[0]}</Text>
+            <Text style={globalStyles.tableCell}>from</Text>
+            <Text style={globalStyles.tableCell}>{item.split('_')[1]}</Text>
+            <Text style={globalStyles.tableCell}>to</Text>
+            <Text style={globalStyles.tableCell}>{item.split('_')[2]}</Text>
+          </View>
+        )}
+      />
       
       <TouchableOpacity style={[globalStyles.button, { backgroundColor: '#2f68c4' }]} onPress={handleSubmit}>
                 <Text style = {globalStyles.buttonText}> Submit!</Text>

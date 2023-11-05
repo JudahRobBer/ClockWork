@@ -87,6 +87,17 @@ export const globalStyles = StyleSheet.create({
         color: '#fbfcde',
     },
 
-
+    tableRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+      },
+    
+    tableCell: {
+        flex: 1,
+        textAlign: 'center',
+      },
 
 } );
